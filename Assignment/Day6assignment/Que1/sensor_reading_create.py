@@ -1,0 +1,24 @@
+
+import mysql.connector as myc
+from datetime import datetime
+connection= myc.connect(
+    host="127.0.0.1",
+    port=3306,
+    user="root",
+    password="root",
+    database="sensor",
+    use_pure=True
+)
+id=int(input("Enter id: "))
+temperature=int(input("Enter Temperature: "))
+humidity=int(input("Enter Humidity: "))
+
+query=f"INSERT INTO sensor_readings (id,temperature,humidity) VALUES({id},{temperature},{humidity})"
+
+cursor=connection.cursor()
+cursor.execute(query)
+
+connection.commit()
+
+cursor.close()
+connection.close()
